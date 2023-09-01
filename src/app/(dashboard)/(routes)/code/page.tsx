@@ -22,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
 import { useProModal } from "@/hooks/use-pro-modal";
+import { toast } from "react-hot-toast";
 
 export default function CodePage() {
   const router = useRouter();
@@ -57,8 +58,9 @@ export default function CodePage() {
 
       if (error?.response?.status === 403) {
         proModal.onOpen();
+      } else {
+        toast.error("Generation failed!!!");
       }
-      console.log(error);
     } finally {
       router.refresh();
     }

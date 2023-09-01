@@ -27,6 +27,7 @@ import {
 import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
 import { useProModal } from "@/hooks/use-pro-modal";
+import { toast } from "react-hot-toast";
 
 export default function ImagePage() {
   const router = useRouter();
@@ -61,6 +62,8 @@ export default function ImagePage() {
 
       if (error?.response?.status === 403) {
         proModal.onOpen();
+      } else {
+        toast.error("Generation failed!!!");
       }
     } finally {
       router.refresh();

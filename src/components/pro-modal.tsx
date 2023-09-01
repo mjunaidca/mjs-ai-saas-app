@@ -18,9 +18,26 @@ import { Card } from "./ui/card";
 import { cn } from "@/lib/utils";
 import { Check, Zap } from "lucide-react";
 import { Button } from "./ui/button";
+import axios from "axios";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 export const ProModal = () => {
   const proModal = useProModal();
+  const [loading, setLoading] = useState(false);
+
+  const onSubscribe = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("/api/stripe");
+
+      window.location.href = response.data.url;
+    } catch (error) {
+      toast.error("Something went wrong!");
+      setLoading(false);
+    }
+  };
+
   return (
     <Dialog open={proModal.isOpen} onOpenChange={proModal.onClose}>
       <DialogContent>
@@ -54,7 +71,13 @@ export const ProModal = () => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button variant={"premium"} size="lg" className="w-full">
+          <Button
+            onClick={onSubscribe}
+            variant={"premium"}
+            size="lg"
+            className="w-full"
+            disabled={loading}
+          >
             <Zap className="w-4 h-4 ml-2 fill-white" /> Upgrade
           </Button>
         </DialogFooter>
