@@ -48,6 +48,7 @@ export default function CodePage() {
       });
 
       setMessages((current) => [...current, userMessage, response.data]);
+      form.reset();
     } catch (error) {
       //* Open Pro Modal
       console.log(error);

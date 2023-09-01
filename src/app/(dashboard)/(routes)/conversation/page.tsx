@@ -47,6 +47,7 @@ export default function ConversationPage() {
       });
 
       setMessages((current) => [...current, userMessage, response.data]);
+      form.reset();
     } catch (error) {
       //* Open Pro Modal
       console.log(error);
