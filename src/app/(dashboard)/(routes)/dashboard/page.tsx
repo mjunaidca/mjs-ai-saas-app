@@ -13,11 +13,7 @@ import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-// import { tools } from "@/constants";
-
-export const MAX_FREE_COUNTS = 5;
-
-export const tools = [
+const tools = [
   {
     label: "Conversation",
     icon: MessageSquare,
